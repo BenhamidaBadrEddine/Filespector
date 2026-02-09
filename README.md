@@ -98,12 +98,16 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
  
  
 ##################################################
+
  Risk Level : Malicious
+ 
  ❌ Malicious
 
 ################################################## Findings ##################################################
 
+
 • Moderate entropy (expected for this file type): 7.29
+
 • YARA rule(s) matched: Suspecious_strings
 
 ################################################## End of Report ##################################################
