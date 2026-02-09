@@ -79,6 +79,7 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
 
 
 ################################################## File Report ##################################################
+
  File Name : canva.pdf
  File Path : C:\path\to\canva.pdf
  File Extension : .pdf
@@ -88,15 +89,18 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
  • Rule: Suspicious_strings
     - Matched $net4
  MIME Type : application/pdf
+ 
 ##################################################
  Risk Level : Malicious
  ❌ Malicious
 
 ################################################## Findings ##################################################
+
 • Moderate entropy (expected for this file type): 7.29
 • YARA rule(s) matched: Suspecious_strings
 
 ################################################## End of Report ##################################################
+
 
 ## Target Audience
 
