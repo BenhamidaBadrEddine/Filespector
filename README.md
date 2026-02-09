@@ -81,14 +81,21 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
 ################################################## File Report ##################################################
 
  File Name : canva.pdf
+ 
  File Path : C:\path\to\canva.pdf
+ 
  File Extension : .pdf
+ 
  SHA256 : 1ee935319793923e83e0a652b3b239fca3f7dcaeaf6c6149ca88e4aaa5de7764
+ 
  File Entropy : 7.29
+ 
  YARA Matches:
+ 
  • Rule: Suspicious_strings
     - Matched $net4
  MIME Type : application/pdf
+ 
  
 ##################################################
  Risk Level : Malicious
