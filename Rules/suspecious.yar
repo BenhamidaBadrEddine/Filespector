@@ -1,4 +1,4 @@
-rule Suspecious_strings {
+rule Suspicious_strings {
     meta :
         description = "The rules used to detect suspecious strings"
         author = "Badr Eddine"
