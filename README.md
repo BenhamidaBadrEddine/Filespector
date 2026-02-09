@@ -1,9 +1,9 @@
-# Magic Number File Scanner
+# Filespector — File Risk Assessment Tool
 
-Magic Number File Scanner is a Python-based tool that analyzes files to detect suspicious or potentially malicious behavior.
-It combines file signature analysis, entropy calculation, MIME type verification, and YARA rules to assess file risk.
+Filespector is a Python-based static malware analysis tool that evaluates file risk using heuristics and rule-based detection.  
+It combines file signature analysis, entropy calculation, MIME type verification, and YARA rules to assess suspicious or potentially malicious behavior.  
+The project is learning-focused and serves as a foundation for more advanced malware analysis and endpoint security systems.
 
-This project was built as a learning-focused security tool and can serve as a foundation for more advanced malware analysis systems.
 
 ## Features
 
@@ -85,7 +85,7 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
  SHA256 : 1ee935319793923e83e0a652b3b239fca3f7dcaeaf6c6149ca88e4aaa5de7764
  File Entropy : 7.29
  YARA Matches:
- • Rule: Suspecious_strings
+ • Rule: Suspicious_strings
     - Matched $net4
  MIME Type : application/pdf
 ##################################################
@@ -97,6 +97,13 @@ Enter the path to the file you want to scan: C:\path\to\canva.pdf
 • YARA rule(s) matched: Suspecious_strings
 
 ################################################## End of Report ##################################################
+
+## Target Audience
+
+- Cybersecurity students
+- Malware analysis beginners
+- Blue team / SOC trainees
+- Anyone learning YARA and static analysis
 
 ## Limitations
 
