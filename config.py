@@ -30,17 +30,17 @@ SAFE_MIME_TYPES = [
     "application/x-7z-compressed",
     "application/pdf",
     "application/zip",
-    "application/x-rar-compressed",
+    "application/x-rar-compressed","application/x-rar",
 ]
 
-DANGEROUS_MIME_TYPES = [
+EXECUTABLE_MIME_TYPES = {
     "application/x-msdownload",
     "application/x-msdos-program",
     "application/x-dosexec",
     "application/x-msi",
     "application/x-sh",
-    "application/x-shellscript"
-]
+    "application/x-shellscript",
+}
 
 # Extension → MIME type mapping
 EXTENSION_MIME_MAP = {
@@ -71,7 +71,7 @@ EXTENSION_MIME_MAP = {
 
     # Archives
     ".zip": ["application/zip"],
-    ".rar": ["application/x-rar-compressed"],
+    ".rar": ["application/x-rar-compressed","application/x-rar"],
     ".7z": ["application/x-7z-compressed"],
     ".tar": ["application/x-tar"],
     ".cab": ["application/vnd.ms-cab-compressed"],
@@ -122,12 +122,20 @@ EXTENSION_MIME_MAP = {
     ".cpl": ["application/x-cpl"],
 }
 
+KNOWN_MIME_TYPES = {
+    mime_type
+    for mime_types in EXTENSION_MIME_MAP.values()
+    for mime_type in mime_types
+}
+
+KNOWN_MIME_TYPES.update(EXECUTABLE_MIME_TYPES)
 
 HIGH_ENTROPY_ALLOWED = {
     "application/zip",
     "application/pdf",
     "image/png",
     "image/jpeg",
+    "application/x-rar",
     "application/x-gzip",
     "application/x-7z-compressed"
 }

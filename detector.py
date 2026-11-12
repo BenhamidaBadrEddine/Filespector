@@ -80,31 +80,35 @@ def get_file_info(file_path):
 
 
 
-def check_mismatch (file_extension, mime_type):
-    if file_extension in EXTENSION_MIME_MAP:
-        expected_mime = EXTENSION_MIME_MAP[file_extension]
-        return mime_type not in expected_mime
-    return False
+def check_mismatch(file_extension, mime_type):
+    expected_mime = EXTENSION_MIME_MAP.get(file_extension)
+
+    if expected_mime is None:
+        return False
+
+    if mime_type not in KNOWN_MIME_TYPES:
+        return False
+
+    return mime_type not in expected_mime
+
 
 
 
 def assess_risk(extension, mime_type, entropy=None):
     flags = []
     risk_level = BENIGN
-    
+
     mismatch = check_mismatch(extension, mime_type)
-    is_dangerous_mime = mime_type in DANGEROUS_MIME_TYPES
     is_suspicious_extension = extension in SUSPICIOUS_FILE_EXTENSIONS
     is_safe_mime = mime_type in SAFE_MIME_TYPES
-    
+
     if mismatch:
         flags.append("Extension/MIME mismatch")
         risk_level = MALICIOUS
     
-    if is_dangerous_mime:
-        flags.append("Dangerous MIME type detected")
-        risk_level = MALICIOUS
-    
+    if mime_type in EXECUTABLE_MIME_TYPES:
+        flags.append("Executable or script MIME type detected")
+
     if is_suspicious_extension and risk_level != MALICIOUS:
         flags.append("Suspicious file extension")
         risk_level = SUSPICIOUS
@@ -115,7 +119,9 @@ def assess_risk(extension, mime_type, entropy=None):
                 flags.append(f"Unexpected high entropy: {entropy}")
                 risk_level = MALICIOUS
             else:
-                flags.append(f"High entropy (expected for this file type): {entropy}")
+                flags.append(
+                    f"High entropy (expected for this file type): {entropy}"
+                )
 
         elif entropy >= 6.5:
             if mime_type not in HIGH_ENTROPY_ALLOWED:
@@ -123,17 +129,22 @@ def assess_risk(extension, mime_type, entropy=None):
                 if risk_level == BENIGN:
                     risk_level = SUSPICIOUS
             else:
-                flags.append(f"Moderate entropy (expected for this file type): {entropy}")
+                flags.append(
+                    f"Moderate entropy (expected for this file type): {entropy}"
+                )
 
+    else:
+        flags.append("Entropy analysis unavailable")
 
-        if not flags and is_safe_mime:
-            flags.append("File appears safe")
-            risk_level = BENIGN
-        elif not flags:
+    if not flags:
+        if is_safe_mime:
+            flags.append("No suspicious indicators detected")
+        else:
             flags.append("Unknown or uncommon file type")
             risk_level = SUSPICIOUS
-        
-        return risk_level, flags
+
+    return risk_level, flags
+
 
 
 
